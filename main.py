@@ -9,16 +9,19 @@
 #
 #     Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
 
-def is_prime(x, primes):
+from typing import List, Set, Tuple
+
+
+def is_prime(x: int, primes: Set[int]) -> bool:
     """
     Returns True iff `x` is a prime number.
 
     Args:
-        x (int): Natural number
+        x      (int):      Natural number
         primes (Set[int]): Set of all primes less than x
 
     Returns:
-         True iff `x` is a prime number
+         (bool): True iff `x` is a prime number
 
     Raises:
         AssertError: if incorrect args are given
@@ -29,17 +32,17 @@ def is_prime(x, primes):
     return True
 
 
-def is_truncatable(x, primes):
+def is_truncatable(x: int, primes: Set[int]) -> bool:
     """
     Returns True iff given prime `x` is 'dually' truncatable,
       meaning truncatable from left-to-right and right-to-left.
 
     Args:
-        x (int): Prime number
+        x      (int):      Prime number
         primes (Set[int]): Set of all primes less than `x`
 
     Returns:
-        True iff `x` is dually truncatable
+        (bool): True iff `x` is dually truncatable
     """
     # Assume `x` itself is already prime
     # Check truncation in both directions using `primes`
@@ -49,15 +52,16 @@ def is_truncatable(x, primes):
     return all(map(lambda q: q in primes, [int(s[i:]) for i in range(1, n)] + [int(s[:j]) for j in range(1, n)]))
 
 
-def main():
+def main() -> Tuple[List[int], int]:
     """
     Returns the list of exactly 11 primes which are truncatable from left-to-right and right-to-left,
       as well as the sum of those numbers.
 
     Returns:
-        Tuple of:
-          * List[int] of 11 dually truncatable primes
-          * Sum of those ^
+        (Tuple[List[int], int]):
+            Tuple of:
+              * List[int] of 11 dually truncatable primes
+              * Sum of those ^
     """
     # Accumulate a set of primes while searching
     primes = {2, 3, 5, 7}  # These aren't candidates, according to instructions
